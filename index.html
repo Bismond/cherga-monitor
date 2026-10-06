@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Черга DMSU Monitor</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+      background: #f4f6f8;
+      color: #17212b;
+    }
+
+    body { margin: 0; padding: 32px 16px; }
+    main { max-width: 900px; margin: 0 auto; }
+    h1 { margin: 0 0 8px; font-size: clamp(28px, 5vw, 44px); }
+    .intro { margin: 0 0 24px; color: #607080; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+    button {
+      border: 0; border-radius: 8px; padding: 12px 16px; cursor: pointer;
+      background: #0d6efd; color: white; font-size: 15px; font-weight: 600;
+    }
+    button.secondary { background: #dfe6ed; color: #17212b; }
+    button:disabled { opacity: .55; cursor: wait; }
+    .status {
+      display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+      padding: 14px 16px; margin-bottom: 16px; border-radius: 8px;
+      background: white; border-left: 4px solid #607080;
+    }
+    .status.ok { border-left-color: #198754; }
+    .status.alert { border-left-color: #dc3545; background: #fff3f3; }
+    #last-check { color: #607080; }
+    .locations { display: grid; gap: 12px; }
+    .location {
+      background: white; border-radius: 8px; padding: 16px;
+      box-shadow: 0 2px 8px rgba(23, 33, 43, .07);
+    }
+    .location.available { outline: 2px solid #dc3545; }
+    .location-head { display: flex; justify-content: space-between; gap: 12px; align-items: start; }
+    .label { font-weight: 700; line-height: 1.4; }
+    .meta { margin-top: 6px; color: #607080; font-size: 14px; }
+    .badge { white-space: nowrap; border-radius: 999px; padding: 5px 9px; background: #eef1f4; font-size: 13px; }
+    .available .badge { background: #dc3545; color: white; }
+    .error { color: #b42318; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Монітор черги DMSU</h1>
+    <p class="intro">Перевірка доступності місць кожні 60 секунд.</p>
+
+    <div class="toolbar">
+      <button id="start-button" type="button">Запустити моніторинг</button>
+      <button id="notification-button" class="secondary" type="button">Дозволити сповіщення</button>
+    </div>
+
+    <div id="status" class="status" aria-live="polite">
+      <strong>Моніторинг не запущено</strong>
+      <span id="last-check">Ще не перевірено</span>
+    </div>
+
+    <section id="locations" class="locations" aria-label="Адреси"></section>
+  </main>
+
+  <script src="app.js?v=3"></script>
+</body>
+</html>
